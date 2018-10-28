@@ -15,7 +15,7 @@
 					<a th:href="@{/ver/} + ${factura.cliente.id}" th:text="'volver'"
 						class="btn btn-primary btn-xs"></a>
 				</h4>
-				<form action="@{/factura/form/}" th:object="${factura}"
+				<form th:action="@{/factura/form/}" th:object="${factura}"
 					method="post">
 
 					<div class="form-group row">
@@ -49,7 +49,7 @@
 
 					<table th:replace="factura/plantilla-items :: itemsFactura"></table>
 
-					<table id="cargarItemProdcutos"
+					<table id="cargarItemProductos"
 						class="table table-sm table-striped table-hover">
 						<thead>
 							<tr>
@@ -63,7 +63,7 @@
 						<tbody>
 						</tbody>
 					</table>
-
+					<h5><span class="badge badge-secondary" id="gran_total">0</span></h5>
 					<div class="form-group row">
 						<div class="col-sm-2">
 							<input type="submit" th:value="${titulo}"

@@ -38,7 +38,7 @@
 				linea = linea.replace(/{NOMBRE}/g, ui.item.label);
 				linea = linea.replace(/{PRECIO}/g, ui.item.precio);
 				
-				$("#cargarItemProdcutos tbody").append(linea);
+				$("#cargarItemProductos tbody").append(linea);
 				itemsHelper.calcularImporte(ui.item.value, ui.item.precio, 1);
 				
 				return false;
@@ -46,11 +46,17 @@
 				
 		});
 		
+		$("form").submit(function(){
+			$("#plantillaItemsFactura").remove();
+			return;
+		})
+		
 	});
 	
 	var itemsHelper = {
 			calcularImporte: function(id, precio, cantidad){
 				$("#total_importe_" + id).html(parseInt(precio) * parseInt(cantidad));
+				this.calcularGranTotal();
 			},
 			hasProducto: function(id){
 				
@@ -71,6 +77,15 @@
 			},
 			eliminarLineaFactura: function(id){
 				$("#row_" + id).remove();
+				this.calcularGranTotal();
+			},
+			calcularGranTotal: function(){
+				var total = 0;
+				$('span[id^="total_importe_"]').each(function(){
+					total += parseInt($(this).html());
+				});
+				
+				$("#gran_total").html(total);
 			}
 	}
 	
